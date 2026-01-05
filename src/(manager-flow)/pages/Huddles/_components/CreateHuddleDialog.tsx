@@ -44,7 +44,7 @@ const CreateHuddleDialog = ({ open, onClose }: Props) => {
           <div className="space-y-1">
             <Label>Select Duration *</Label>
             <Select>
-              <SelectTrigger>
+              <SelectTrigger className="w-full">
                 <SelectValue placeholder="Select duration" />
               </SelectTrigger>
               <SelectContent>
@@ -57,7 +57,7 @@ const CreateHuddleDialog = ({ open, onClose }: Props) => {
           <div className="space-y-1">
             <Label>Select Participants *</Label>
             <Select>
-              <SelectTrigger>
+              <SelectTrigger className="w-full">
                 <SelectValue placeholder="Select participants" />
               </SelectTrigger>
               <SelectContent>

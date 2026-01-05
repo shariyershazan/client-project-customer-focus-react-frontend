@@ -1,14 +1,8 @@
-
-
-
-
-import { Plus, Search, Video } from "lucide-react";
+import { Video } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import CommonTable, {
   type Column,
 } from "@/components/shared/common/CommonTable";
-import { useState } from "react";
-import CreateHuddleDialog from "./_components/CreateHuddleDialog";
 
 interface HuddleData {
   id: string;
@@ -22,19 +16,7 @@ interface HuddleData {
   participantAvatars: string[];
 }
 
-const ManagerHuddles = () => {
-  const [search, setSearch] = useState("");
-  const [isCreateHuddleOpen, setIsCreateHuddleOpen] = useState(false);
-
-
-  const handleOpenAdd = () => {
-  setIsCreateHuddleOpen(true);
-};
-
-const handleCloseAdd = () => {
-  setIsCreateHuddleOpen(false);
-};
-
+const TodaysHuddles = () => {
   // Avatar Images Data
   const participantAvatars = [
     "https://randomuser.me/api/portraits/men/32.jpg",
@@ -45,9 +27,6 @@ const handleCloseAdd = () => {
     "https://randomuser.me/api/portraits/men/12.jpg",
     "https://randomuser.me/api/portraits/men/25.jpg",
   ];
-
-
- 
 
   // Today's Huddles Data 
   const todaysHuddlesData: HuddleData[] = [
@@ -144,7 +123,6 @@ const handleCloseAdd = () => {
         // Show 4 avatars as per design, then show remaining count
         const visibleAvatars = item.participantAvatars.slice(0, 4);
         const remainingCount = item.participants - 4;
-        
 
         return (
           <div className="flex items-center">
@@ -191,50 +169,21 @@ const handleCloseAdd = () => {
   ];
 
   return (
-    <div className="mt-10 space-y-6 mx-5">
-      <div className="flex justify-between items-center">
-        <h1 className="text-3xl font-extrabold text-slate-900">Huddles</h1>
-        <div className="flex gap-3">
-          <Button
-              onClick={handleOpenAdd}
-              className="bg-[#8C23CC] hover:bg-[#761eb0] text-white px-6 font-bold"
-            >
-              <Plus size={18} className="mr-1" /> Add Huddle
-            </Button>
-
-          {/* <Button variant="outline" className="border-slate-200 cursor-pointer">Import CSV</Button> */}
-        </div>
-      </div>
-
-
+    <div className="mt-10 space-y-6">
+      <h3 className="text-xl font-bold text-slate-900">Today's Huddles</h3>
       <div className="bg-white rounded-xl border border-slate-100 shadow-sm p-6">
-
-        <div className="flex justify-between items-center mb-6">
-          <div className="relative w-96">
-            <Search className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-slate-400" />
-            <input 
-              value={search}
-              onChange={(e) => setSearch(e.target.value)}
-              placeholder="Search by name, email, domain and plan" 
-              className="w-full pl-10 pr-4 py-2.5 border border-slate-200 rounded-lg text-base outline-none focus:ring-1 focus:ring-[#8C23CC]" 
-            />
-          </div>
-          <div className="flex gap-3">
-            <Button variant="outline" className="px-6 cursor-pointer">Filter</Button>
-            <Button variant="outline" className="px-6 flex gap-2 cursor-pointer">Export CSV</Button>
-          </div>
+        <div className="flex justify-end items-center mb-6">
+          <Button
+            variant="outline"
+            className="bg-[#8C23CC] hover:bg-[#761eb0] text-white border-0"
+          >
+            View All
+          </Button>
         </div>
-        
         <CommonTable columns={columns} data={todaysHuddlesData} />
       </div>
-
-      <CreateHuddleDialog
-          open={isCreateHuddleOpen}
-          onClose={handleCloseAdd}
-        />
-
     </div>
   );
 };
 
-export default ManagerHuddles;
+export default TodaysHuddles;

@@ -122,7 +122,7 @@ const handleDelete = (tenant: Tenant) => {
     {
       header: "Status",
       render: (item) => (
-        <Switch
+        <Switch 
           checked={item.isActive}
           onCheckedChange={(checked) => {
             setTenants((prev) =>
@@ -131,7 +131,7 @@ const handleDelete = (tenant: Tenant) => {
               )
             );
           }}
-          className="data-[state=checked]:bg-[#8C23CC] cursor-pointer"
+          className="data-[state=checked]:bg-[#8C23CC]  scale-115 cursor-pointer"
         />
       ),
     },

@@ -198,19 +198,8 @@ const ClientAdminBranchesManagement = () => {
 
         <CommonTable columns={columns} data={paginatedData} />
         
-        <div className="mt-6 flex items-center justify-between">
-          <div className="flex items-center gap-2 text-base text-slate-500">
-            Show 
-            <select 
-               className="border rounded p-1"
-               value={pageSize}
-               onChange={(e) => setPageSize(Number(e.target.value))}
-            >
-              <option value={10}>10</option>
-              <option value={20}>20</option>
-            </select>
-            entries
-          </div>
+        <div className="">
+         
           <CommonPagination 
             totalItems={filteredData.length} 
             pageSize={pageSize} 

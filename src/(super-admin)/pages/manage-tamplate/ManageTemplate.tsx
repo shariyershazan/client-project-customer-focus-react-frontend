@@ -64,7 +64,7 @@ const SuperAdminManageTemplate = () => {
         <Switch 
           checked={item.status} 
           onCheckedChange={(checked) => handleStatusChange(item.id, checked)}
-          className="data-[state=checked]:bg-[#8A2BE2] cursor-pointer"
+          className="data-[state=checked]:bg-[#8A2BE2] cursor-pointer scale-115"
         />
       ),
     },

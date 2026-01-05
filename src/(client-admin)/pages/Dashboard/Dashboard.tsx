@@ -1,5 +1,5 @@
 import { useState, useMemo } from "react";
-import { Search, Download } from "lucide-react";
+import { Search, Download, Zap } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import CommonTable, { type Column } from "@/components/shared/common/CommonTable";
 import CommonPagination from "@/components/shared/common/CommonPagination";
@@ -8,12 +8,10 @@ import { TrendsSection } from "./_components/TrendsSection";
 import { PerformanceData, type BranchPerformance } from "@/(executive-flow)/pages/Dashboard/_components/ExecutiveData";
 
 const ClientAdminDashboard = () => {
-  // 1. State Management
   const [search, setSearch] = useState("");
   const [currentPage, setCurrentPage] = useState(1);
   const [pageSize, setPageSize] = useState(5);
 
-  // 2. Functional Search Logic
   const filteredData = useMemo(() => {
     return PerformanceData.filter(item => 
       item.name.toLowerCase().includes(search.toLowerCase()) ||
@@ -21,13 +19,11 @@ const ClientAdminDashboard = () => {
     );
   }, [search]);
 
-  // 3. Pagination Logic
   const paginatedData = useMemo(() => {
     const start = (currentPage - 1) * pageSize;
     return filteredData.slice(start, start + pageSize);
   }, [filteredData, currentPage, pageSize]);
 
-  // 4. Table Columns Configuration
   const columns: Column<BranchPerformance>[] = [
     {
       header: "Company Name",
@@ -67,16 +63,40 @@ const ClientAdminDashboard = () => {
   ];
 
   return (
-    <div className="p-8  min-h-screen space-y-8">
-      {/* Header Section */}
+    <div className="p-8 min-h-screen space-y-8 bg-[#FDFDFD]">
+      {/* 1. HEADER SECTION */}
       <div className="flex justify-between items-center">
         <h1 className="text-3xl font-extrabold text-slate-900">Organization Overview</h1>
-        <Button className="bg-[#8C23CC] hover:bg-[#761eb0] text-white px-6 cursor-pointer">
-          Add New Branch
+        <Button className="bg-[#8C23CC] hover:bg-[#761eb0] text-white px-8 font-bold h-11 rounded-xl shadow-lg shadow-purple-100 cursor-pointer">
+          Upgrade Plan
         </Button>
       </div>
 
-      {/* Stats Grid */}
+      {/* 2. ACTIVE PLAN BANNER (New Section from Screenshot) */}
+      <div className="bg-[#1A1A1A] rounded-2xl p-6 flex items-center justify-between border border-slate-800 shadow-xl">
+        <div className="flex items-center gap-5">
+          <div className="w-12 h-12 bg-slate-800 rounded-xl flex items-center justify-center text-slate-400">
+            <Zap size={22} fill="currentColor" />
+          </div>
+          <div>
+            <div className="flex items-center gap-3">
+              <h2 className="text-white text-xl font-semibold">Growth Plan</h2>
+              <span className="bg-slate-700 text-slate-300 text-[10px] uppercase font-bold px-2 py-0.5 rounded">
+                Active
+              </span>
+            </div>
+            <p className="flex items-center gap-2 text-slate-500 text-xs mt-1 font-medium">
+              Billed monthly <span className="mx-1"><span className="text-lg  text-white/80">•</span></span> Renews on Jan 15, 2025
+            </p>
+          </div>
+        </div>
+        <div className="text-right">
+          <div className="text-white text-2xl font-semibold ">$299</div>
+          <div className="text-slate-500 text-[10px] font-bold uppercase tracking-wider">/month</div>
+        </div>
+      </div>
+
+      {/* 3. STATS GRID */}
       <div className="grid grid-cols-1 md:grid-cols-4 gap-6">
         <DashboardStat label="Complaints" value="25%" isUp={false} status="success" />
         <DashboardStat label="CSAT" value="1.8 pts" isUp={true} status="warning" />
@@ -84,10 +104,23 @@ const ClientAdminDashboard = () => {
         <DashboardStat label="Repeat" value="15%" isUp={true} status="success" />
       </div>
       
-      {/* Trends Graph */}
+      {/* 4. TRENDS GRAPH */}
       <TrendsSection />
 
-      {/* Branch Table Section */}
+      {/* 5. WORKFLOW ACTIVATION CARD (New Section from Screenshot) */}
+      <div className="bg-white rounded-2xl p-8 border border-slate-100 shadow-sm flex justify-between items-center">
+        <div>
+          <h3 className="text-[#FF0080] text-lg font-extrabold mb-1">90 Days Workflow</h3>
+          <p className="text-slate-400 text-[11px] font-medium uppercase tracking-tight">
+            Creation date: Jan 15, 2025
+          </p>
+        </div>
+        <div className="bg-[#FFF0F7] text-[#FF0080] px-4 py-1.5 rounded-lg text-xs font-bold border border-[#FFD6E9]">
+          Activated
+        </div>
+      </div>
+
+      {/* 6. BRANCH TABLE SECTION */}
       <div className="bg-white rounded-xl shadow-sm border border-slate-100 p-8">
         <div className="flex justify-between items-center mb-8">
           <h3 className="text-2xl font-bold text-slate-900">Branch Variance</h3>
@@ -102,7 +135,7 @@ const ClientAdminDashboard = () => {
                 value={search}
                 onChange={(e) => {
                     setSearch(e.target.value);
-                    setCurrentPage(1); // Reset to page 1 on search
+                    setCurrentPage(1);
                 }}
               />
             </div>
@@ -115,10 +148,8 @@ const ClientAdminDashboard = () => {
           </div>
         </div>
 
-        {/* The Table */}
         <CommonTable columns={columns} data={paginatedData} />
 
-        {/* Pagination Integration */}
         <div className="mt-6">
             <CommonPagination 
                 totalItems={filteredData.length} 

@@ -10,6 +10,8 @@ import { IoCalendarClearOutline } from "react-icons/io5";
 import { FiUsers } from "react-icons/fi";
 import { SiAdguard } from "react-icons/si";
 import { RiTimerLine } from "react-icons/ri";
+import { MdOutlineDone, MdOutlineWatchLater } from "react-icons/md";
+import { LiaInfoCircleSolid } from "react-icons/lia";
 
 // Types matching the screenshot data
 export type CoachingLog = {
@@ -79,17 +81,17 @@ const ManagerCoachingLogs = () => {
         <div className="flex items-center gap-2">
           {item.compliance === 'Verified' ? (
             <div className="flex items-center gap-1.5 text-green-500 font-medium">
-              <span className="w-4 h-4 rounded-full border border-green-500 flex items-center justify-center text-[10px]">✓</span>
+              <span className="0 flex items-center justify-center text-[16px]"><MdOutlineDone  /></span>
               <span className="text-xs text-slate-600">Verified</span>
             </div>
           ) : item.compliance === 'Pending' ? (
             <div className="flex items-center gap-1.5 text-amber-500 font-medium">
-               <span className="w-4 h-4 rounded-full border border-amber-500 flex items-center justify-center text-[10px]">🕒</span>
+               <span className=" flex items-center justify-center text-[16px]"><MdOutlineWatchLater /></span>
                <span className="text-xs text-slate-600">Pending</span>
             </div>
           ) : (
-            <div className="flex items-center gap-1.5 text-slate-300 font-medium">
-               <span className="w-4 h-4 rounded-full border border-slate-300 flex items-center justify-center text-[10px]">!</span>
+            <div className="flex items-center gap-1.5 text-slate-500 font-medium">
+               <span className=" flex items-center justify-center text-[16px]"><LiaInfoCircleSolid/></span>
                <span className="text-xs text-slate-600">Not Started</span>
             </div>
           )}
@@ -108,7 +110,7 @@ const ManagerCoachingLogs = () => {
   ];
 
   return (
-    <div className="p-8 space-y-8 bg-[#FDFDFD] min-h-screen">
+    <div className="p-8 space-y-8 min-h-screen">
       <h1 className="text-3xl font-extrabold text-slate-900">Coaching Logs</h1>
 
       {/* Summary Cards */}

@@ -17,7 +17,7 @@ export const ScorecardMetric = ({ label, value, isUp, status }: MetricProps) => 
     <div className="mt-4 flex justify-between items-end">
       <div>
         <div className="flex items-center gap-2 mb-1">
-          {isUp ? <span className="text-[#8C23CC] text-`3xl">↑</span> : <span className="text-[#B91010] text-3xl">↓</span>}
+          {isUp ? <span className="text-[#8C23CC] text-3xl">↑</span> : <span className="text-[#B91010] text-3xl">↓</span>}
           <span className="text-3xl font-extrabold text-[#8C23CC]">{value}</span>
         </div>
       
